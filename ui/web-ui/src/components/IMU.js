@@ -35,7 +35,7 @@ class IMU extends Component {
           width={500}
           height={500}
           texPath=""
-          src="./RoverModel2020.stl.obj"
+          src="./2021-rover-model.obj"
           position={this.props.position}
           rotation={this.props.rotation}
         />
