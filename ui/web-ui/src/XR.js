@@ -8,7 +8,7 @@ import "./css/XR.css";
 
 //a-sky test image
 import image_360_beach from './images/360_beach.jpeg';
-import rover_2020 from './rover_2020.gltf';
+import rover_2020 from './RoverModel2021(Scaled).gltf';
 
 
 class XR extends Component {
@@ -68,7 +68,7 @@ class XR extends Component {
             >
             </a-curvedimage>
 
-            <a-gltf-model src="#rover-model" scale="0.02 0.02 0.02" position="-0.75 -0.5 -2.5"></a-gltf-model>
+            <a-gltf-model src="#rover-model" scale="1 1 1" position="0 0 -0.5"></a-gltf-model>
 
             <a-sky radius="10" src="#beach-test"></a-sky>
           </a-scene>

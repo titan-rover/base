@@ -67,8 +67,9 @@ class App extends Component {
       // Set dictionaries with keys and values with data structures
       imu: {
         // Default/Offset Oriention for Rover Model
-        rotation: { x: -Math.PI / 2, y: 0, z: Math.PI / 2 },
-        position: { x: 0, y: -60, z: 40 },
+        // rotation: { x: -Math.PI / 2, y: 0, z: Math.PI / 2 },
+        rotation: { x: 0, y: 0, z: 0 },
+        position: { x: 0, y: -10, z: 0 },
         // heading: null    // Depreciated Variable
       },
 
