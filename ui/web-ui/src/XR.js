@@ -50,136 +50,136 @@ class XR extends Component {
       });
     });
 
-  // Register listener callbacks
-  // Handlers for when ROS messages have been received
-  // Generally updates/sets state data which with re-render the UI with new data
+    // Register listener callbacks
+    // Handlers for when ROS messages have been received
+    // Generally updates/sets state data which with re-render the UI with new data
 
-  // IMU message handler
-  if(this.imu_listener) {
-    this.imu_listener.subscribe(m => {
-      // let x = Math.cos(m.yaw) * Math.cos(m.pitch);
-      // let y = Math.sin(m.yaw) * Math.cos(m.pitch);
-      // let z = Math.sin(m.pitch);
+    // IMU message handler
+    if (this.imu_listener) {
+      this.imu_listener.subscribe(m => {
+        // let x = Math.cos(m.yaw) * Math.cos(m.pitch);
+        // let y = Math.sin(m.yaw) * Math.cos(m.pitch);
+        // let z = Math.sin(m.pitch);
 
-      // Quaternian orientation
-      let x = m.orientation.x;
-      let y = m.orientation.y;
-      let z = m.orientation.z;
-      let w = m.orientation.w;
+        // Quaternian orientation
+        let x = m.orientation.x;
+        let y = m.orientation.y;
+        let z = m.orientation.z;
+        let w = m.orientation.w;
 
-      let roll = null;
-      let pitch = null;
-      let yaw = null;
+        let roll = null;
+        let pitch = null;
+        let yaw = null;
 
 
-      // Convertions to Roll, Pitch, and Yaw
-      // Roll
-      let sinr_cosp = 2 * (w * x + y * z);
-      let cosr_cosp = 1 - 2 * (x * x + y * y);
-      roll = Math.atan2(sinr_cosp, cosr_cosp);
+        // Convertions to Roll, Pitch, and Yaw
+        // Roll
+        let sinr_cosp = 2 * (w * x + y * z);
+        let cosr_cosp = 1 - 2 * (x * x + y * y);
+        roll = Math.atan2(sinr_cosp, cosr_cosp);
 
-      // Pitch
-      let sinp = 2 * (w * y - z * x);
-      if (Math.abs(sinp) >= 1)
-        if (sinp >= 0)
-          pitch = Math.PI / 2; // use 90 degrees if out of range
+        // Pitch
+        let sinp = 2 * (w * y - z * x);
+        if (Math.abs(sinp) >= 1)
+          if (sinp >= 0)
+            pitch = Math.PI / 2; // use 90 degrees if out of range
+          else
+            pitch = -Math.PI / 2;
         else
-          pitch = -Math.PI / 2;
-      else
-        pitch = Math.asin(sinp);
+          pitch = Math.asin(sinp);
 
-      // Yaw
-      let siny_cosp = 2 * (w * z + x * y);
-      let cosy_cosp = 1 - 2 * (y * y + z * z);
-      yaw = Math.atan2(siny_cosp, cosy_cosp);
+        // Yaw
+        let siny_cosp = 2 * (w * z + x * y);
+        let cosy_cosp = 1 - 2 * (y * y + z * z);
+        yaw = Math.atan2(siny_cosp, cosy_cosp);
 
-      // Console Output
-      console.log("Yaw: " + yaw);
-      console.log("Pitch: " + pitch);
-      console.log("Roll: " + roll);
+        // Console Output
+        console.log("Yaw: " + yaw);
+        console.log("Pitch: " + pitch);
+        console.log("Roll: " + roll);
 
-      console.log(m);
-      console.log(x, y, z);
+        console.log(m);
+        console.log(x, y, z);
 
-      // Set State
-      this.setState({ //setState() schedules an update to a component's state object. When state changes the component responds by re-rendering
-        imu: {
-          rotation: {
-            x: -roll - Math.PI / 2,
-            y: -pitch,
-            z: yaw + Math.PI / 2
-            // x: x - Math.PI/2,
-            // y: y,
-            //z: z + Math.PI/2
-          },
-          position: this.state.imu.position
-        }
+        // Set State
+        this.setState({ //setState() schedules an update to a component's state object. When state changes the component responds by re-rendering
+          imu: {
+            rotation: {
+              x: -roll - Math.PI / 2,
+              y: -pitch,
+              z: yaw + Math.PI / 2
+              // x: x - Math.PI/2,
+              // y: y,
+              //z: z + Math.PI/2
+            },
+            position: this.state.imu.position
+          }
+        });
       });
-    });
-  }
-
-
-  // Creates ROS Topic objects for Listeners
-  // Similar to Publishers, but includes throttle rate and queque for the incoming messages
-  createListeners() {
-    try {
-      // this.antenna_listener = new ROSLIB.Topic({
-      //   ros: this.ros,
-      //   name: "/antenna",
-      //   messageType: "fake_sensor_test/antenna",
-      //   throttle_rate: this.THROTTLE_RATE,
-      //   queue_length: this.QUEUE_LENGTH
-      // });
-
-      // this.rovergps_listener = new ROSLIB.Topic({
-      //   ros: this.ros,
-      //   name: "/rover_gnss",
-      //   messageType: "telemetry/gps",
-      //   throttle_rate: this.THROTTLE_RATE,
-      //   queue_length: this.QUEUE_LENGTH
-      // });
-
-      // this.basegps_listener = new ROSLIB.Topic({
-      //   ros: this.ros,
-      //   //name: "/rover_gnss",
-      //   //messageType: "telemetry/gps",
-      //   throttle_rate: 10,
-      //   queue_length: this.QUEUE_LENGTH
-      // });
-
-      // console.log(this.rovergps_listener);
-
-      this.imu_listener = new ROSLIB.Topic({
-        ros: this.ros,
-        name: "/imu",
-        messageType: "sensor_msgs/Imu",
-        throttle_rate: this.THROTTLE_RATE,
-        queue_length: this.QUEUE_LENGTH
-      });
-
-      // this.mobility_listener = new ROSLIB.Topic({
-      //   ros: this.ros,
-      //   name: "/mobility",
-      //   messageType: "fake_sensor_test/mobility",
-      //   throttle_rate: this.THROTTLE_RATE,
-      //   queue_length: this.QUEUE_LENGTH
-      // });
-
-      // this.ultrasonic_listener = new ROSLIB.Topic({
-      //   ros: this.ros,
-      //   name: "/ultrasonic",
-      //   messageType: "fake_sensor_test/ultrasonic",
-      //   throttle_rate: this.THROTTLE_RATE,
-      //   queue_length: this.QUEUE_LENGTH
-      // });
-    } catch (e) {
-      //Fail to create ROS object
-      this.setState({
-        status: "Error"
-      });
-      console.log("Error: Failed to create ros listener");
     }
   }
+
+    // Creates ROS Topic objects for Listeners
+    // Similar to Publishers, but includes throttle rate and queque for the incoming messages
+    createListeners() {
+      try {
+        // this.antenna_listener = new ROSLIB.Topic({
+        //   ros: this.ros,
+        //   name: "/antenna",
+        //   messageType: "fake_sensor_test/antenna",
+        //   throttle_rate: this.THROTTLE_RATE,
+        //   queue_length: this.QUEUE_LENGTH
+        // });
+
+        // this.rovergps_listener = new ROSLIB.Topic({
+        //   ros: this.ros,
+        //   name: "/rover_gnss",
+        //   messageType: "telemetry/gps",
+        //   throttle_rate: this.THROTTLE_RATE,
+        //   queue_length: this.QUEUE_LENGTH
+        // });
+
+        // this.basegps_listener = new ROSLIB.Topic({
+        //   ros: this.ros,
+        //   //name: "/rover_gnss",
+        //   //messageType: "telemetry/gps",
+        //   throttle_rate: 10,
+        //   queue_length: this.QUEUE_LENGTH
+        // });
+
+        // console.log(this.rovergps_listener);
+
+        this.imu_listener = new ROSLIB.Topic({
+          ros: this.ros,
+          name: "/imu",
+          messageType: "sensor_msgs/Imu",
+          throttle_rate: this.THROTTLE_RATE,
+          queue_length: this.QUEUE_LENGTH
+        });
+
+        // this.mobility_listener = new ROSLIB.Topic({
+        //   ros: this.ros,
+        //   name: "/mobility",
+        //   messageType: "fake_sensor_test/mobility",
+        //   throttle_rate: this.THROTTLE_RATE,
+        //   queue_length: this.QUEUE_LENGTH
+        // });
+
+        // this.ultrasonic_listener = new ROSLIB.Topic({
+        //   ros: this.ros,
+        //   name: "/ultrasonic",
+        //   messageType: "fake_sensor_test/ultrasonic",
+        //   throttle_rate: this.THROTTLE_RATE,
+        //   queue_length: this.QUEUE_LENGTH
+        // });
+      } catch (e) {
+        //Fail to create ROS object
+        this.setState({
+          status: "Error"
+        });
+        console.log("Error: Failed to create ros listener");
+      }
+    }
 
     render() {
       return (
