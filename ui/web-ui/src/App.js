@@ -101,9 +101,13 @@ class App extends Component {
     /* this.connectRosBridge(url) is a top level function call that passes the url to the connectRosBridge(url) functions
        inside of all the custom react imports we imported at the top. */
     //this.connectRosBridge("ws://192.168.1.100:9090");
-
-    this.connectRosBridge("ws://localhost:9090");
-    // this.connectRosBridge("wss://controls.titanrover.com:9443");
+    if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+      // dev code
+      this.connectRosBridge("ws://localhost:9090");
+    } else {
+      // production code
+      this.connectRosBridge("wss://controls.titanrover.com:9443");
+    }
 
 
     /* These lines instantiate listeners, publishers, and callback registrations for all the react modules we imported */
