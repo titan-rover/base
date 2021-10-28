@@ -19,7 +19,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 // Custom React Components
 /*
-Import classes from the different component files 
+Import classes from the different component files
 */
 import IMU from "./components/IMU";
 import MapTile from "./components/MapTile";
@@ -150,7 +150,7 @@ class App extends Component {
         prevData.push([new Date().getTime(), m.signal_strength]); // push adds to an array
 
         if (m.signal_strength < 10) {
-          toast.error("SIGNAL STRENGTH CRITICAL!", { // display a toast message at position: with the correct css class element (poor_signal_id) 
+          toast.error("SIGNAL STRENGTH CRITICAL!", { // display a toast message at position: with the correct css class element (poor_signal_id)
             position: toast.POSITION.BOTTOM_RIGHT,
             toastId: this.POOR_SIGNAL_ID
           });
@@ -294,7 +294,7 @@ class App extends Component {
         prevDataD.push([new Date().getTime(), m.max_distance]); // push adds to an array
 
         if (m.max_distance < 10) {
-          toast.error("LESS THAN 10 DISTANCE!", { // display a toast message at position: with the correct css class element (poor_signal_id) 
+          toast.error("LESS THAN 10 DISTANCE!", { // display a toast message at position: with the correct css class element (poor_signal_id)
             position: toast.POSITION.BOTTOM_RIGHT,
             toastId: this.POOR_SIGNAL_ID
           });
@@ -406,7 +406,7 @@ class App extends Component {
     }
   }
 
-  
+
 
   // Renders Container of Various Components
   // State Data is passed to the appropriate Component Prop Data
@@ -507,7 +507,7 @@ class App extends Component {
             {/* <TemperatureSensor/> */}
 
             {/* <Col>
-            <MapTile currentPosition={this.state.gps.currentPosition} />
+            <MapTile currentPosition={this.state.gps.currentPosition} /> //
           </Col>
           <Col>
             <Compass heading={this.state.imu.heading} />
@@ -517,6 +517,12 @@ class App extends Component {
               {/* Ultrasonic Sensor Component */}
               <UltrasonicSensor
                 max_distance={this.state.ultrasonic.distance} />
+            </Col>
+          </Row>
+          <Row className="mt-2">
+            <Col>
+              {/* Map Component */}
+              <MapTile lat={33.88} lng={-117.88}/>
             </Col>
           </Row>
           <Row className="mt-2">
