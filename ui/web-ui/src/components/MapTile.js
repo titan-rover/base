@@ -6,7 +6,7 @@ import L from "leaflet";
 import  MarkerClusterGroup  from "react-leaflet-markercluster";
 import localforage from 'localforage';
 import 'leaflet-offline';
-import icon from 'leaflet/dist/images/car.svg';
+import icon from 'leaflet/dist/images/marker-icon.png';
 
 
 const robotMarker = [
