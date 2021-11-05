@@ -25,13 +25,7 @@ class XR extends Component {
       }
     };
 
-    if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-      // dev code
-      this.connectRosBridge("ws://localhost:9090");
-    } else {
-      // production code
-      this.connectRosBridge("wss://controls.titanrover.com:9443");
-    }
+    this.connectRosBridge("ws://localhost:9090");
 
     this.createListeners();
     // this.createPublishers();
