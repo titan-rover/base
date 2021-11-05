@@ -74,7 +74,7 @@ class App extends Component {
       },
 
       // Following Data is not currently used beyond fake testing data
-      //    GPS, Antenna Signal, Ultrasonic Sensor, and Current Draw for Claw and Mobility
+      //    GPS, Antenna Signal, Ultrasonic Sensor, and Current Draw for Claw and Mobility, lat and lng used for MapTile
       gps: {
         currentPosition: [null, null]
       },
@@ -95,7 +95,9 @@ class App extends Component {
       },
       mobility: {
         amps: []
-      }
+      },
+      lat: 33.88,
+      lng: -117.88
     };
 
     /* this.connectRosBridge(url) is a top level function call that passes the url to the connectRosBridge(url) functions
@@ -115,6 +117,8 @@ class App extends Component {
     this.createPublishers();
     this.registerCallbacks();
   }
+
+
 
   registerCallbacks() {
     //Register ros callbacks
@@ -460,7 +464,7 @@ class App extends Component {
                   <Dropdown.Item href="#/action-3"> Action 3</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
-            </Col>
+            </Col>  console.log(latlng)
             <Col>
               <div style={{border: "1px solid green", height: "300px", width: "300px"}}>
                 Cam 4(Bck)
@@ -522,7 +526,8 @@ class App extends Component {
           <Row className="mt-2">
             <Col>
               {/* Map Component */}
-              <MapTile lat={33.88} lng={-117.88}/>
+              <MapTile latitude={this.state.latitude} longitude={this.state.longitude}/>
+
             </Col>
           </Row>
           <Row className="mt-2">
