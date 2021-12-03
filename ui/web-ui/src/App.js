@@ -33,6 +33,7 @@ import InverseKinematics from "./components/InverseKinematics";
 import TemperatureSensor from "./components/TemperatureSensor";
 import MyNavbar from "./components/Navbar";
 // import { Dropdown } from "bootstrap";
+import "leaflet/dist/leaflet.css"
 
 const styles = {
   grid: {
@@ -58,6 +59,7 @@ class App extends Component {
   HIGH_CURRENT_ID = "high-current-id";
 
   constructor(props) {
+
     super(props);
     console.log("CONSTRUCTOR CALLED");
 
@@ -76,7 +78,7 @@ class App extends Component {
       // Following Data is not currently used beyond fake testing data
       //    GPS, Antenna Signal, Ultrasonic Sensor, and Current Draw for Claw and Mobility, lat and lng used for MapTile
       gps: {
-        currentPosition: [null, null]
+        currentPosition: [33.88, -117.88]
       },
 
       antenna: {
@@ -96,24 +98,38 @@ class App extends Component {
       mobility: {
         amps: []
       },
-      lat: 33.88,
-      lng: -117.88
+      latitude: 33.88,
+      longitude: -117.88,
+      markerList: []
+
     };
 
     /* this.connectRosBridge(url) is a top level function call that passes the url to the connectRosBridge(url) functions
        inside of all the custom react imports we imported at the top. */
     //this.connectRosBridge("ws://192.168.1.100:9090");
-
-    this.connectRosBridge("ws://localhost:9090");
-    // this.connectRosBridge("wss://controls.titanrover.com:9443");
+    if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+      // dev code
+      this.connectRosBridge("ws://localhost:9090");
+    } else {
+      // production code
+      this.connectRosBridge("wss://controls.titanrover.com:9443");
+    }
 
 
     /* These lines instantiate listeners, publishers, and callback registrations for all the react modules we imported */
     this.createListeners();
     this.createPublishers();
     this.registerCallbacks();
+
+    this.autonomousMarkerHandler = this.autonomousMarkerHandler.bind(this);
+
   }
 
+  autonomousMarkerHandler(markerList) {
+    this.setState({
+        markerList: markerList
+      })
+  }
 
 
   registerCallbacks() {
@@ -330,6 +346,14 @@ class App extends Component {
   // Similar to Publishers, but includes throttle rate and queque for the incoming messages
   createListeners() {
     try {
+      this.rovergps_listener = new ROSLIB.Topic({
+        ros: this.ros,
+        name: "/gnss",
+        messageType: "telemetry/gps",
+        throttle_rate: this.THROTTLE_RATE,
+        queue_length: this.QUEUE_LENGTH
+      });
+      /*
       this.antenna_listener = new ROSLIB.Topic({
         ros: this.ros,
         name: "/antenna",
@@ -338,13 +362,6 @@ class App extends Component {
         queue_length: this.QUEUE_LENGTH
       });
 
-      this.rovergps_listener = new ROSLIB.Topic({
-        ros: this.ros,
-        name: "/rover_gnss",
-        messageType: "telemetry/gps",
-        throttle_rate: this.THROTTLE_RATE,
-        queue_length: this.QUEUE_LENGTH
-      });
 
       this.basegps_listener = new ROSLIB.Topic({
         ros: this.ros,
@@ -379,7 +396,7 @@ class App extends Component {
         messageType: "fake_sensor_test/ultrasonic",
         throttle_rate: this.THROTTLE_RATE,
         queue_length: this.QUEUE_LENGTH
-      });
+      });*/
     } catch (e) {
       //Fail to create ROS object
       this.setState({
@@ -460,7 +477,7 @@ class App extends Component {
                   <Dropdown.Item href="#/action-3"> Action 3</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
-            </Col>  console.log(latlng)
+            </Col>
             <Col>
               <div style={{border: "1px solid green", height: "300px", width: "300px"}}>
                 Cam 4(Bck)
@@ -522,7 +539,7 @@ class App extends Component {
           <Row className="mt-2">
             <Col>
               {/* Map Component */}
-              <MapTile latitude={this.state.latitude} longitude={this.state.longitude}/>
+              <MapTile markerList={this.state.markerList} latitude={this.state.latitude} longitude={this.state.longitude}/>
 
             </Col>
           </Row>
@@ -531,7 +548,7 @@ class App extends Component {
               <InverseKinematics />
             </Col>
             <Col>
-              <GPS />
+              <GPS  autonomousMarkerHandler = {this.autonomousMarkerHandler}/>
             </Col>
           </Row>
           {/* <Row className="mt-2">

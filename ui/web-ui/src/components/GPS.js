@@ -5,7 +5,9 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
+
 class GPS extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -25,7 +27,51 @@ class GPS extends Component {
       convertedSecsLat: [0],
       convertedSecsLon: [0],
       gpsArraySize: 1,
+      markerList: [],
     };
+    this.markerHandler = this.props.autonomousMarkerHandler.bind(this);
+  }
+
+  componentDidUpdate(prevProps, prevState)
+  {
+    if(this.state.markerList !== prevState.markerList)
+    {
+      this.markerHandler(this.state.markerList);
+
+    }
+
+  }
+
+  addMarker(lat, lng)
+  {
+    let newMarkerList = [];
+    lat.forEach( (element, index) => {
+      let data = {
+        latitude: lat[index],
+        longitude: lng[index]
+      };
+      newMarkerList.push(data);
+    });
+    return newMarkerList;
+  }
+  removeMarker(removeAmount)
+  {
+    let newMarkerList = [];
+    if(removeAmount > 0)
+    {
+      this.state.markerList.forEach( (element) => {
+        newMarkerList.push(element);
+      });
+      newMarkerList.pop();
+    }
+    return newMarkerList;
+  }
+
+  submitGPSInputs = () => {
+    this.setState({
+      markerList: this.addMarker(this.state.lat, this.state.lon)
+    });
+
   }
 
   addAutonomousCoordinates = () => {
@@ -47,6 +93,7 @@ class GPS extends Component {
       convertedSecsLon: [...this.state.convertedSecsLon, 0],
       gpsArraySize: this.state.gpsArraySize + 1,
     });
+
   };
 
   removeAutonomousCoordinates = () => {
@@ -69,7 +116,9 @@ class GPS extends Component {
       convertedSecsLat: this.state.convertedSecsLat.slice(0, newArraySize),
       convertedSecsLon: this.state.convertedSecsLon.slice(0, newArraySize),
       gpsArraySize: newArraySize,
+      markerList: this.removeMarker(removeAmount)
     })
+
   }
 
   convertLatToDMS(event, index) {
@@ -238,8 +287,6 @@ class GPS extends Component {
     });
   }
 
-  submitGPSInputs() {
-  }
 
   render() {
     const {lat, lon, degreesLat, degreesLon, minsLat, minsLon, secsLat, secsLon} = this.state;
@@ -262,8 +309,8 @@ class GPS extends Component {
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Latitude</span>
               </div>
-              <Form.Control type="input" 
-                value={lat[index]} 
+              <Form.Control type="input"
+                value={lat[index]}
                 onChange={(event) => {this.convertLatToDMS(event, index);}}
                 />
             </div>
@@ -294,14 +341,14 @@ class GPS extends Component {
               onChange={(event) => {this.convertSecondsToLat(event, index);}}
               />
             </div>
-          </Col>          
+          </Col>
           <Col>
             <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Longitude</span>
               </div>
-              <Form.Control type="input" 
-                value={lon[index]} 
+              <Form.Control type="input"
+                value={lon[index]}
                 onChange={(event) => {this.convertLonToDMS(event, index);}}
                 />
             </div>
@@ -339,16 +386,16 @@ class GPS extends Component {
           ))}
         </Row>
       </Form.Group>
-    </Form>  
+    </Form>
     <Button type="button" variant="primary" onClick={this.addAutonomousCoordinates}>
-      Add 
+      Add
     </Button>
     <Button type="button" variant="primary" onClick={this.removeAutonomousCoordinates}>
-      Remove 
+      Remove
     </Button>
     <Button type="submit" variant="primary" onClick={this.submitGPSInputs}>
       Submit
-    </Button> 
+    </Button>
   </Card.Body>
   </Card>
   );

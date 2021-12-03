@@ -1,13 +1,17 @@
-import React, { Component, useEffect, useState  } from "react";
+import React, { Component, useEffect, useState, useRef  } from "react";
 import Card from "react-bootstrap/Card";
 import { MapContainer, Marker, Popup, TileLayer, ZoomControl, useMap  } from 'react-leaflet';
 import '../css/MapTile.css';
+import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import  MarkerClusterGroup  from "react-leaflet-markercluster";
 import localforage from 'localforage';
 import 'leaflet-offline';
+import icon from 'leaflet/dist/images/marker-icon.png';
+import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+import icon2 from '../images/arrow.svg';
 
-
+/*makes the map to center on the marker*/
 function ChangeMapView({ coords }) {
     const map = useMap();
 
@@ -19,6 +23,19 @@ function ChangeMapView({ coords }) {
 
 }
 
+/*Defines the default marker*/
+const DefaultIcon = L.icon({
+    iconUrl: icon,
+    shadowUrl: iconShadow
+});
+
+L.Marker.prototype.options.icon = DefaultIcon;
+
+const customIcon = new L.Icon({
+  iconUrl: icon2,
+  iconSize: new L.Point(100, 120),
+});
+
 
 function MapTile(props)
 {
@@ -26,13 +43,10 @@ function MapTile(props)
   const [lat, setLat] = useState(props.latitude);
   const [lng, setLng] = useState(props.longitude);
   const [toggled, setToggle] = useState(true);
+  const [markerList, setMarkerList] = useState(props.markerList);
 
-/*
-  const tick = () => {
-    setLat(lat + 0.001);
-    setLng(lng + 0.001);
-  }
-*/
+
+/*runs when the MapTile component is mounted and unmounted */
   useEffect(() =>{
     console.log('component mounted')
 
@@ -40,13 +54,37 @@ function MapTile(props)
       console.log('componet will unmount')
     }
 
-  }, [])// the array at the end tells us that this useEffect acts as ComponentDidMount and the return value acts as ComponentWillUnmount
+  }, [])
 
+
+/*checks changes the latitude and longitude when they are changed in App.js*/
   useEffect(() => {
     setLat(props.latitude);
     setLng(props.longitude);
-  },) // the array at the end tells us that this useEffect acts as ComponentDidUpdate
+  }, [props.latitude, props.longitude]
+)
 
+  useEffect(() => {
+    setMarkerList(props.markerList);
+  }, [props.markerList],
+)
+
+const mounted = useRef();
+useEffect(() => {
+  if (!mounted.current) {
+    // do componentDidMount logic
+
+    mounted.current = true;
+  } else {
+    // do componentDidUpdate logic
+    if(markerList[0] !== undefined)
+      console.log(markerList[0]);
+  }
+});
+
+
+
+/*function that locks and unlocks the map on the centner*/
   const onClickHandler = (e) => {
     if(toggled)
     {
@@ -63,7 +101,7 @@ function MapTile(props)
       <Card.Header>Map Tile</Card.Header>
       <Card.Body>
         <button onClick={onClickHandler}>toggle</button>
-        <MapContainer center={[lat, lng]} zoom={18} maxZoom={18} scrollWheelZoom={false}>
+        <MapContainer center={[lat, lng]} zoom={15} maxZoom={18} scrollWheelZoom={false}>
           {( ()=> {
             if(toggled === true)
             {
@@ -84,11 +122,27 @@ function MapTile(props)
           another map attribution= 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
           */
           attribution="&copy; <a href=&quot;https://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-          url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
+          url="Fullerton/{z}/{x}/{y}.png"
           />
-          <Marker position={[lat, lng]}>
+          <Marker position={[lat, lng]} icon={customIcon}>
 
           </Marker>
+          {
+                markerList.length > 0 &&
+                markerList.map((marker, index) => {
+
+                 return (
+                   <Marker key={index} position={[markerList[index].latitude, markerList[index].longitude]}  >
+
+                   </Marker>
+
+                    );
+                  })
+
+
+
+
+          }
 
         </MapContainer>
       </Card.Body>
