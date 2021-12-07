@@ -1,15 +1,13 @@
-import React, { Component, useEffect, useState, useRef  } from "react";
+import React, { useEffect, useState, useRef  } from "react";
 import Card from "react-bootstrap/Card";
-import { MapContainer, Marker, Popup, TileLayer, ZoomControl, useMap  } from 'react-leaflet';
+import { MapContainer, Marker, Popup, TileLayer, useMap  } from 'react-leaflet';
 import '../css/MapTile.css';
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import  MarkerClusterGroup  from "react-leaflet-markercluster";
+import {divIcon} from "leaflet";
 import localforage from 'localforage';
-import 'leaflet-offline';
 import icon from 'leaflet/dist/images/marker-icon.png';
-import iconShadow from 'leaflet/dist/images/marker-shadow.png';
-import icon2 from '../images/arrow.svg';
+
 
 /*makes the map to center on the marker*/
 function ChangeMapView({ coords }) {
@@ -22,19 +20,27 @@ function ChangeMapView({ coords }) {
 
 
 }
+function RotateMarker(props)
+{
+  var customIcon = new L.divIcon({
+    html: `<img class="leaflet-marker-icon" src="arrow.svg" alt="compass arrow" id="roverIcon" style="
+    transform: translate(-11px, -11px) rotate(`+ props.angle + `deg);
+    -moz-transform: translate(-11px, -11px) rotate(`+ props.angle + `deg);
+    -webkit-transform: translate(-11px, -11px) rotate(`+ props.angle + `deg);"/>`,
+    iconSize: new L.Point(20, 20),
+    className: 'icon',
+  });
+  return <Marker position = {[props.lat,props.lng]} icon={customIcon}> </Marker>;
+}
+
 
 /*Defines the default marker*/
 const DefaultIcon = L.icon({
     iconUrl: icon,
-    shadowUrl: iconShadow
 });
-
 L.Marker.prototype.options.icon = DefaultIcon;
 
-const customIcon = new L.Icon({
-  iconUrl: icon2,
-  iconSize: new L.Point(100, 120),
-});
+
 
 
 function MapTile(props)
@@ -44,18 +50,24 @@ function MapTile(props)
   const [lng, setLng] = useState(props.longitude);
   const [toggled, setToggle] = useState(true);
   const [markerList, setMarkerList] = useState(props.markerList);
-
+  const [angle, setAngle] = useState(props.angle);
 
 /*runs when the MapTile component is mounted and unmounted */
   useEffect(() =>{
-    console.log('component mounted')
+
 
     return () => {
-      console.log('componet will unmount')
+
     }
 
   }, [])
 
+
+  useEffect(() => {
+    setAngle(props.angle);
+
+  },[props.angle]
+)
 
 /*checks changes the latitude and longitude when they are changed in App.js*/
   useEffect(() => {
@@ -77,8 +89,8 @@ useEffect(() => {
     mounted.current = true;
   } else {
     // do componentDidUpdate logic
-    if(markerList[0] !== undefined)
-      console.log(markerList[0]);
+
+
   }
 });
 
@@ -124,9 +136,11 @@ useEffect(() => {
           attribution="&copy; <a href=&quot;https://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
           url="Fullerton/{z}/{x}/{y}.png"
           />
-          <Marker position={[lat, lng]} icon={customIcon}>
 
-          </Marker>
+
+
+          <RotateMarker lat={lat} lng={lng} angle={angle} />
+
           {
                 markerList.length > 0 &&
                 markerList.map((marker, index) => {

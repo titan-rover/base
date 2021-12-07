@@ -100,8 +100,8 @@ class App extends Component {
       },
       latitude: 33.88,
       longitude: -117.88,
-      markerList: []
-
+      markerList: [],
+      angle: 0
     };
 
     /* this.connectRosBridge(url) is a top level function call that passes the url to the connectRosBridge(url) functions
@@ -539,7 +539,7 @@ class App extends Component {
           <Row className="mt-2">
             <Col>
               {/* Map Component */}
-              <MapTile markerList={this.state.markerList} latitude={this.state.latitude} longitude={this.state.longitude}/>
+              <MapTile angle={this.state.angle} markerList={this.state.markerList} latitude={this.state.latitude} longitude={this.state.longitude}/>
 
             </Col>
           </Row>

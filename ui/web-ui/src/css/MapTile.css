@@ -16,3 +16,18 @@
   height: 500px;
   width: 100%;
 }
+
+.icon{
+
+
+}
+#roverIcon{
+  margin: 0px;
+  width: 40px;
+  height: 40px;
+  transform-origin: center;
+  -webkit-transform-origin: center;
+  -moz-transform-origin: center;
+
+  z-index: 1000;
+}
