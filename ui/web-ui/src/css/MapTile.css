@@ -17,10 +17,22 @@
   width: 100%;
 }
 
-.icon{
+.lock-button{
+  width: 125px;
+  height: 35px;
+  background-color: white;
+  font-weight: bold;
+  border-style: none;
+  border-radius: 5%;
 
 
 }
+
+.lock-button:hover{
+  background-color: #DCDCDC;
+}
+
+
 #roverIcon{
   margin: 0px;
   width: 40px;
