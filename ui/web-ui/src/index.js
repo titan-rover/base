@@ -4,6 +4,7 @@ import { Route, Link, Switch, BrowserRouter as Router } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import Science from "./Science";
+import Fluid from "./Fluid";
 import Extreme from "./Extreme";
 import Autonomous from "./Autonomous";
 import XR from "./XR";
@@ -18,6 +19,9 @@ const routing = (
       </Route>
       <Route path="/science">
         <Science />
+      </Route>
+      <Route path="/fluid">
+        <Fluid />
       </Route>
       <Route path="/extreme">
         <Extreme />

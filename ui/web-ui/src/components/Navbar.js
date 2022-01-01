@@ -29,7 +29,13 @@ class MyNavbar extends Component {
                             <li class="nav-item">
                                 {/* <a class="nav-link" href="https://controls.titanrover.com">Science Mode</a> */}
                                 {/* <a class="nav-link" href="http://localhost:3000/science">Science</a> */}
-                                <NavLink exact to ="/science" className="nav-links"> Science </NavLink>
+                                <div class="dropdown">
+                                  <NavLink exact to ="/science" className="nav-links dropbtn"> Science </NavLink>
+                                <div class="dropdown-content">
+                                  <NavLink exact to ="/science" className="nav-links link"> Soil </NavLink>
+                                  <NavLink exact to ="/fluid" className="nav-links link"> Fluid </NavLink>
+                                </div>
+                              </div>
                             </li>
                             <li class="nav-item">
                                 {/* <a class="nav-link" href="https://controls.titanrover.com">Electricals Mode</a> */}
