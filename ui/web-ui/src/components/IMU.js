@@ -18,6 +18,9 @@ class IMU extends Component {
   //     this.setState({ rotation: rotation });
   //   }, 1000);
   }
+  componentWillUnmount(){
+    this.tick.animate = false;
+}
 
   componentDidMount() {
     this.tick = Tick(() => {
