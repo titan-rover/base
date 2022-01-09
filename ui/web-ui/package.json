@@ -15,7 +15,6 @@
     "highcharts-react-official": "^2.2.2",
     "jquery": "^3.6.0",
     "leaflet": "^1.7.1",
-    "leaflet-offline": "^1.1.0",
     "localforage": "^1.10.0",
     "popper.js": "^1.16.1",
     "react": "^16.14.0",
