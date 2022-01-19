@@ -31,6 +31,7 @@ import MobilityCurrentDraw from "./components/MobilityCurrentDraw";
 import ROSLIB from "roslib";
 import InverseKinematics from "./components/InverseKinematics";
 import TemperatureSensor from "./components/TemperatureSensor";
+import XboxController from "./components/XboxController";
 import MyNavbar from "./components/Navbar";
 // import { Dropdown } from "bootstrap";
 import "leaflet/dist/leaflet.css"
@@ -534,6 +535,11 @@ class App extends Component {
               {/* Ultrasonic Sensor Component */}
               <UltrasonicSensor
                 max_distance={this.state.ultrasonic.distance} />
+            </Col>
+          </Row>
+          <Row className="mt-2">
+            <Col>
+            <XboxController></XboxController>
             </Col>
           </Row>
           <Row className="mt-2">
