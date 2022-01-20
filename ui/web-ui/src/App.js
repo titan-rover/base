@@ -125,7 +125,13 @@ class App extends Component {
     this.autonomousMarkerHandler = this.autonomousMarkerHandler.bind(this);
 
   }
-
+  componentWillUnmount(){
+    // this.antenna_listener.unsubscribe();
+    this.rovergps_listener.unsubscribe();
+    // this.imu_listener.unsubscribe();
+    // this.mobility_listener.unsubscribe();
+    // this.ultrasonic_listener.unsubscribe();
+  }
   autonomousMarkerHandler(markerList) {
     this.setState({
         markerList: markerList

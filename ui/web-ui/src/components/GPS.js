@@ -298,43 +298,43 @@ class GPS extends Component {
       <Form.Group controlId="formGroupEmail">
         <Row style={{justifyContent: 'space-around'}}>
           {this.state.autonomousCoordinates.map((input, index) => (
-          <Row>
+          <Row key={index}>
             <Col>
             <Col>
             GPS Input: {index+1}
             </Col>
             <Row>
           <Col>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">Latitude</span>
+            <div className="input-group mb-3">
+              <div className="input-group-prepend">
+                <span className="input-group-text" id="basic-addon1">Latitude</span>
               </div>
               <Form.Control type="input"
                 value={lat[index]}
                 onChange={(event) => {this.convertLatToDMS(event, index);}}
                 />
             </div>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">Degrees</span>
+            <div className="input-group mb-3">
+              <div className="input-group-prepend">
+                <span className="input-group-text" id="basic-addon1">Degrees</span>
               </div>
               <Form.Control type="input"
                 value={degreesLat[index]}
                 onChange={(event) => {this.convertDegreesToLat(event, index);}}
                 />
             </div>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">Minutes</span>
+            <div className="input-group mb-3">
+              <div className="input-group-prepend">
+                <span className="input-group-text" id="basic-addon1">Minutes</span>
               </div>
               <Form.Control type="input"
                 value={minsLat[index]}
                 onChange={(event) => {this.convertMinutesToLat(event, index);}}
                 />
             </div>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">Seconds</span>
+            <div className="input-group mb-3">
+              <div className="input-group-prepend">
+                <span className="input-group-text" id="basic-addon1">Seconds</span>
               </div>
             <Form.Control type="input"
               value={secsLat[index]}
@@ -343,36 +343,36 @@ class GPS extends Component {
             </div>
           </Col>
           <Col>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">Longitude</span>
+            <div className="input-group mb-3">
+              <div className="input-group-prepend">
+                <span className="input-group-text" id="basic-addon1">Longitude</span>
               </div>
               <Form.Control type="input"
                 value={lon[index]}
                 onChange={(event) => {this.convertLonToDMS(event, index);}}
                 />
             </div>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">Degrees</span>
+            <div className="input-group mb-3">
+              <div className="input-group-prepend">
+                <span className="input-group-text" id="basic-addon1">Degrees</span>
               </div>
               <Form.Control type="input"
                 value={degreesLon[index]}
                 onChange={(event) => {this.convertDegreesToLon(event, index);}}
                 />
             </div>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">Minutes</span>
+            <div className="input-group mb-3">
+              <div className="input-group-prepend">
+                <span className="input-group-text" id="basic-addon1">Minutes</span>
               </div>
               <Form.Control type="input"
                 value={minsLon[index]}
                 onChange={(event) => {this.convertMinutesToLon(event, index);}}
                 />
             </div>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">Seconds</span>
+            <div className="input-group mb-3">
+              <div className="input-group-prepend">
+                <span className="input-group-text" id="basic-addon1">Seconds</span>
               </div>
             <Form.Control type="input"
               value={secsLon[index]}

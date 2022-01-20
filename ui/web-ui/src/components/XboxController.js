@@ -10,62 +10,62 @@ class XboxController extends Component {
 
   render() {
     return (
-<body>
-<div class="card">
-  <div class="card-body">
-<div class="xbox-container">
-    <div class="main1">
+<>
+<div className="card">
+  <div className="card-body">
+<div className="xbox-container">
+    <div className="main1">
 
 
     </div>
 
-<div class="side1">
+<div className="side1">
 
 </div>
 
 
-<div class="side2">
-    
+<div className="side2">
+
 </div>
 
 
 
-<div class="main">
+<div className="main">
 
-<div class="indent">
+<div className="indent">
 </div>
-<div class="long"> </div>
-<div class="circle"></div>
-<div class="button1"><i class="fa fa-window-restore"></i></div>
-<div class="button2"><i class="fa fa-navicon"></i></div>
-<div class="buttony">Y</div>
-<div class="buttonx">X</div>
-<div class="buttona">A</div>
-<div class="buttonb">B</div>
-<div class="arrow1"></div>
-<div class="arrow2"></div>
-<div class="circle2">
-    <div class="scroll"></div>
-    <div class="inner">
-        <div class="inner-inner"></div>
+<div className="long"> </div>
+<div className="circle"></div>
+<div className="button1"><i className="fa fa-window-restore"></i></div>
+<div className="button2"><i className="fa fa-navicon"></i></div>
+<div className="buttony">Y</div>
+<div className="buttonx">X</div>
+<div className="buttona">A</div>
+<div className="buttonb">B</div>
+<div className="arrow1"></div>
+<div className="arrow2"></div>
+<div className="circle2">
+    <div className="scroll"></div>
+    <div className="inner">
+        <div className="inner-inner"></div>
 
 
-        <div class="circle3">
-            <div class="scroll"></div>
-            <div class="inner">
-                <div class="inner-inner"></div>
-        
+        <div className="circle3">
+            <div className="scroll"></div>
+            <div className="inner">
+                <div className="inner-inner"></div>
+
     </div>
 </div>
 </div>
 
 
 </div>
-</div> 
 </div>
 </div>
 </div>
-</body>
+</div>
+</>
     );
   }
 }
