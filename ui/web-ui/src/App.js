@@ -66,7 +66,7 @@ class App extends Component {
 
     // in react, both this.props and this.state represent the rendered values (i.e what's currently on the screen)
     this.state = {
-
+      imu_on: false,
       // Set dictionaries with keys and values with data structures
       imu: {
         // Default/Offset Oriention for Rover Model
@@ -123,7 +123,7 @@ class App extends Component {
     this.registerCallbacks();
 
     this.autonomousMarkerHandler = this.autonomousMarkerHandler.bind(this);
-
+    this.onClickHandler = this.onClickHandler.bind(this);
   }
   componentWillUnmount(){
     // this.antenna_listener.unsubscribe();
@@ -132,11 +132,30 @@ class App extends Component {
     // this.mobility_listener.unsubscribe();
     // this.ultrasonic_listener.unsubscribe();
   }
+
+  onClickHandler(e) {
+    let btn = document.getElementById("imu_button");
+    if(this.state.imu_on)
+    {
+      this.setState({
+        imu_on: false
+      })
+      btn.innerHTML = 'Display';
+    }
+    else
+    {
+      this.setState({
+        imu_on: true
+      })
+      btn.innerHTML = 'Undisplay';
+    }
+  }
   autonomousMarkerHandler(markerList) {
     this.setState({
         markerList: markerList
       })
   }
+
 
 
   registerCallbacks() {
@@ -506,10 +525,23 @@ class App extends Component {
           <Row className="mt-2">
             <Col>
               {/* IMU Component */}
-              <IMU
-                position={this.state.imu.position}
-                rotation={this.state.imu.rotation}
-              />
+
+
+              {(() => {
+                if(this.state.imu_on === true)
+                {
+                  return(
+                    <IMU
+                    position={this.state.imu.position}
+                    rotation={this.state.imu.rotation}
+                    />
+                  )
+                }
+              })
+              ()}
+              <button id="imu_button" onClick={this.onClickHandler}>
+              Display
+              </button>
             </Col>
             <Col>
               {/* Antenna Component */}
