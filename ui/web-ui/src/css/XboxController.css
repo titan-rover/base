@@ -1,378 +1,354 @@
-body {
-    background-color: pink;
+.axes {
+  padding: 1em;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Muli:wght@900&display=swap');
-
-/* container */
-.xbox-container {
-    margin: auto;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    width: 500px;
-    height: 500px;
-    font-family: 'Muli', sans-serif;
-   
+.buttons {
+  position: relative;
+  margin: 100px auto;
+  width: 600px;
+  height: 480px;
 }
 
+/*meter*/.axis {
+  min-width: 200px;
+  margin: 1em;
+}
 
-/* control shape */
-.main {
-    position: absolute;
-    top: 50px;
-   
-    border-bottom: 300px solid white;
-    border-left: 50px solid transparent;
-    border-right: 50px solid transparent;
-    height: 0;
-    width: 400px;
-    border-radius: 25px;
-   z-index: 1;
-   
-    
-  }
-
-  .main1 {
-    position: absolute;
-    top: 50px;
-   
-    border-bottom: 300px solid white;
-    border-left: 50px solid transparent;
-    border-right: 50px solid transparent;
-    height: 0;
-    width: 400px;
-    border-radius: 25px;
-    box-shadow: -1em -1em 1.5em rgba(0, 0, 0, 0.6), 0 0 0 1px #aaa;
-    z-index: 0;
-
-    
-  }
-
-.side1{
-    position: absolute;
-    width: 200px;
-    height: 400px;
-    background: white;
-    border-radius: 200px / 100px;
-    transform: rotate(20deg);
-    top: 18px;
-    left: 150px;
-    box-shadow: -1em -1em 1.5em rgba(0, 0, 0, 0.6), 0 0 0 1px #aaa, inset 40px 0px 20px rgba(0,0,0,0.3);
-    border-top: 18px solid black;
-  }
-
-
-  .side2{
-    position: absolute;
-    width: 200px;
-    height: 400px;
-    background: white;
-    border-radius: 200px / 100px;
-    transform: rotate(-20deg);
-    top: 18px;
-    right: 250px;
-    box-shadow: -1em -1em 1.5em rgba(0, 0, 0, 0.6), 0 0 0 1px #aaa, inset 40px 0px 20px rgba(0,0,0,0.2);
-    border-top: 22px solid black;
-  }
-
-
-  .indent {
-    position: absolute;
-        border-bottom: 60px solid rgba(204, 204, 204,0.3);
-
-        border-left: 25px solid transparent;
-        border-right: 25px solid transparent;
-        height: 0;
-        width: 200px;
-        transform: rotate(180deg);
-        left: 60px;
-        top: 15px;
-        box-shadow:  inset 40px 0px 20px rgba(0,0,0,0.3);
-      
-      }
-
-      .long {
-        position: absolute;
-        width: 330px;
-        height: 14px;
-        background-color: black;
-        left: -10px;
-        border-radius: 50px;
-    }
-  
-
-   
-
-      /* buttons */
-
-      .buttony {
-        width: 40px;
-        height: 40px;
-        background: rgb(29, 29, 29);
-        border-radius: 50%;
-        position: absolute;
-       top: 60px;
-       right: -30px;
-       box-shadow:
-		-0.2em -0.125em 0.125em rgba(0, 0, 0, 0.4), 
-		0 0 0 0.04em rgba(0, 0, 0, 0.5), 
-		0.02em 0.02em 0.02em rgba(0, 0, 0, 0.4) inset, 
-		-0.05em -0.05em 0.02em rgba(255, 255, 255, 0.8) inset;
-        text-align: center;
-        color: yellow;
-        font-size: 1.5rem;
-        line-height: 40px;
-        background: linear-gradient(90deg,black  0%, rgb(48, 47, 47) 50%, rgb(15, 15, 15) 100%);;
-      }
-
-      .buttonx {
-        width: 40px;
-        height: 40px;
-        background: rgb(29, 29, 29);
-        border-radius: 50%;
-        position: absolute;
-       top: 100px;
-       right: 10px;
-       box-shadow:
-		-0.2em -0.125em 0.125em rgba(0, 0, 0, 0.4), 
-		0 0 0 0.04em rgba(0, 0, 0, 0.5), 
-		0.02em 0.02em 0.02em rgba(0, 0, 0, 0.4) inset, 
-		-0.05em -0.05em 0.02em rgba(255, 255, 255, 0.8) inset;
-        text-align: center;
-        color: rgb(0, 153, 255);
-        font-size: 1.5rem;
-        line-height: 40px;
-        background: linear-gradient(90deg,black  0%, rgb(48, 47, 47) 50%, rgb(15, 15, 15) 100%);;
-      }
-
-      .buttona {
-        width: 40px;
-        height: 40px;
-        background: rgb(29, 29, 29);
-        border-radius: 50%;
-        position: absolute;
-       top: 140px;
-       right: -30px;
-       box-shadow:
-		-0.2em -0.125em 0.125em rgba(0, 0, 0, 0.4), 
-		0 0 0 0.04em rgba(0, 0, 0, 0.5), 
-		0.02em 0.02em 0.02em rgba(0, 0, 0, 0.4) inset, 
-		-0.05em -0.05em 0.02em rgba(255, 255, 255, 0.8) inset;
-        text-align: center;
-        color: lime;
-        font-size: 1.5rem;
-        line-height: 40px;
-        background: linear-gradient(90deg,black  0%, rgb(48, 47, 47) 50%, rgb(15, 15, 15) 100%);;
-      }
-
-      .buttonb {
-        width: 40px;
-        height: 40px;
-        background: rgb(29, 29, 29);
-        border-radius: 50%;
-        position: absolute;
-       top: 100px;
-       right: -70px;
-       box-shadow:
-		-0.2em -0.125em 0.125em rgba(0, 0, 0, 0.4), 
-		0 0 0 0.04em rgba(0, 0, 0, 0.5), 
-		0.02em 0.02em 0.02em rgba(0, 0, 0, 0.4) inset, 
-		-0.05em -0.05em 0.02em rgba(255, 255, 255, 0.8) inset;
-        text-align: center;
-        color: red;
-        font-size: 1.5rem;
-        line-height: 40px;
-        background: linear-gradient(90deg,black  0%, rgb(48, 47, 47) 50%, rgb(15, 15, 15) 100%);;
-      }
-
-
-      
-.button1 {
-  width: 30px;
-  height: 30px;
-  background:white;;
-  border-radius: 50%;
-  position: absolute;
- top: 90px;
- left: 100px;
- box-shadow:
-  -0.3em -0.125em 0.125em rgba(0, 0, 0, 0.4), 
-  0 0 0 0.04em rgba(0, 0, 0, 0.5), 
-  0.02em 0.02em 0.02em rgba(0, 0, 0, 0.4) inset, 
-  -0.05em -0.05em 0.02em rgba(255, 255, 255, 0.8) inset;
+.buttonCon {
+  display: inline-block;
+  width: 1em;
   text-align: center;
-  color: black;;
-  font-size: 1rem;
-  line-height: 30px;
+  padding: 1em;
+  border-radius: 20px;
+  border: 1px solid black;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAAXNSR0IArs4c6QAAAAxJREFUCNdjYPjPAAACAgEAqiqeJwAAAABJRU5ErkJggg==);
+  background-size: 0% 0%;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
 }
 
+.pressed {
+  border: 1px solid red;
+}
 
-
-.button2 {
-  width: 30px;
-  height: 30px;
-  background:white;;
-  border-radius: 50%;
+.touched::after {
+  content: ".";
+  display: block;
   position: absolute;
- top: 90px;
- left: 200px;
- box-shadow:
-  -0.3em -0.125em 0.125em rgba(0, 0, 0, 0.4), 
-  0 0 0 0.04em rgba(0, 0, 0, 0.5), 
-  0.02em 0.02em 0.02em rgba(0, 0, 0, 0.4) inset, 
-  -0.05em -0.05em 0.02em rgba(255, 255, 255, 0.8) inset;
-  text-align: center;
-  color: black;;
-  font-size: 1rem;
-  line-height: 30px;
+  margin-top: -1.5em;
+  margin-left: -1.5em;
+  font-size: 0.8em;
+  opacity: 1;
 }
 
 
-/* control sticks */
-
-
-.circle2 {
-    position: absolute;
-    top: 150px;
-    right: 30px;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
-  -webkit-tap-highlight-color: transparent;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  cursor:pointer;
-  background-color:#eeeeee;
-  width:100px;
-  height:100px;
-  border-radius:50px;
-  box-shadow: -7px -7px 20px 0px #fff9,
-              -4px -4px 5px 0px #fff9,
-              7px 7px 20px 0px #0002,
-              4px 4px 5px 0px #0001,
-              inset 0px 0px 0px 0px #fff9,
-              inset 0px 0px 0px 0px #0001,
-              inset 0px 0px 0px 0px #fff9,
-              inset 0px 0px 0px 0px #0001;
-  transition:box-shadow 0.6s cubic-bezier(.79,.21,.06,.81);
-
+.aButton.touched::after,
+.bButton.touched::after,
+.xButton.touched::after,
+.yButton.touched::after{
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 5px solid red;
 }
 
-.scroll {
-    display: block;
-    background: black;
-    border-radius: 100%;
-    height: 70px;
-    width: 70px;
-    margin: 0;
-    background: radial-gradient(circle at 100px 50px, rgb(54, 54, 54), rgb(0, 0, 0));
-  }
-
-  .inner {
-    position: absolute;
-    
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
-  -webkit-tap-highlight-color: transparent;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  cursor:pointer;
-  background-color:rgb(29, 28, 28);
-  width:50px;
-  height:50px;
-  border-radius:50px;
-  box-shadow: -7px -7px 20px 0px #fff9,
-              -4px -4px 5px 0px #fff9,
-              7px 7px 20px 0px #0002,
-              4px 4px 5px 0px #0001,
-              inset 0px 0px 0px 0px #fff9,
-              inset 0px 0px 0px 0px #0001,
-              inset 0px 0px 0px 0px #fff9,
-              inset 0px 0px 0px 0px #0001;
-  transition:box-shadow 0.6s cubic-bezier(.79,.21,.06,.81);
-  }
-
-  .inner-inner {
-    width:30px;
-    height:30px;
-    border-radius: 50px;
-    border: 1px solid rgba(255, 255, 255,0.1);
-    background-color: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgb(207, 207, 207) 50%, rgba(255,255,255,1) 100%);
-  }
-
-
-  
-.circle3 {
-    position: absolute;
-    top: -120px;
-    left: -240px;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
-  -webkit-tap-highlight-color: transparent;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  cursor:pointer;
-  background-color:#eeeeee;
-  width:100px;
-  height:100px;
-  border-radius:50px;
-  box-shadow: -7px -7px 20px 0px #fff9,
-              -4px -4px 5px 0px #fff9,
-              7px 7px 20px 0px #0002,
-              4px 4px 5px 0px #0001,
-              inset 0px 0px 0px 0px #fff9,
-              inset 0px 0px 0px 0px #0001,
-              inset 0px 0px 0px 0px #fff9,
-              inset 0px 0px 0px 0px #0001;
-  transition:box-shadow 0.6s cubic-bezier(.79,.21,.06,.81);
-
+.start.touched::after,
+.back.touched::after{
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 5px solid red;
 }
 
+.dPadDown.touched::after,
+.dPadLeft.touched::after,
+.dPadRight.touched::after,
+.dPadUp.touched::after{
+  width: 35px;
+  height: 35px;
+  border-radius: 20%;
+  border: 1px solid red;
+}
 
-/* arrow pad */
-.circle {
+.leftBumper.touched::after{
+  width: 110px;
+  height: 45px;
+  border-radius: 120px 20px 25px 15px;
+  border: 1px solid red;
+}
+
+.rightBumper.touched::after{
+  width: 110px;
+  height: 45px;
+  border-radius: 35px 120px 15px 25px;
+  border: 1px solid red;
+}
+
+.leftTrigger.touched::after,
+.rightTrigger.touched::after{
+  border-radius: 25px 25px 0 0;
+  border: 1px solid red;
+  width: 40px;
+  height: 45px;
+}
+
+#joyStickLeft.touched::after{
   width: 100px;
   height: 100px;
-  background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgb(207, 207, 207) 50%, rgba(255,255,255,1) 100%);
+  border: 1px solid red;
   border-radius: 50%;
+}
+
+
+.aButton, .bButton, .xButton, .yButton {
   position: absolute;
- top: 160px;
-  left: 50px;
+  height: 7.4%;
+  width: 6%;
+  border-radius: 480px;
+  cursor: pointer;
+  color: white;
+}
+.yButton {
+  background: radial-gradient(ellipse at center, #fee1a9 0%, #fec75d 100%);
+  border: 2px solid #feb934;
+  top: 19.75%;
+  left: 72.68%;
+}
+.bButton {
+  background: radial-gradient(ellipse at center, #b8da73 0%, #9aca36 100%);
+  border: 2px solid #7ba22b;
+  top: 29%;
+  left: 80.2%;
+}
+.xButton {
+  background: radial-gradient(ellipse at center, #8aaed9 0%, #5086c6 100%);
+  border: 2px solid #386dab;
+  top: 29%;
+  left: 65.25%;
+}
+.aButton {
+  background: radial-gradient(ellipse at center, #d7756c 0%, #c14135 100%);
+  border: 2px solid #99342a;
+  top: 38.5%;
+  left: 72.68%;
+}
+.leftTrigger, .leftBumper, .rightTrigger, .rightBumper {
+  position: absolute;
+  border: 1px solid #4c4e56;
+  color: #4c4e56;
+}
+.leftTrigger, .rightTrigger {
+  background: linear-gradient(to bottom, #989aa3 14%, #8a8d97 27%, #7d808b 56%, #7d808b 60%, #646771 71%, #34363b 100%);
+}
+.leftBumper, .rightBumper {
+  background: linear-gradient(to bottom, #646771 14%, #8a8d97 27%, #7d808b 46%, #7d808b 100%);
 }
 
 
-.arrow1 {
-    width: 90px;
-    height: 30px;
-    background-color: grey;
-    position: absolute;
-    left: 55px;
-    top: 195px;
-    border-radius: 5px;
-    box-shadow:
-    -0.2em -0.125em 0.125em rgba(0, 0, 0, 0.4), 
-    0 0 0 0.04em rgba(0, 0, 0, 0.5), 
-    0.02em 0.02em 0.02em rgba(0, 0, 0, 0.4) inset, 
-    -0.05em -0.05em 0.02em rgba(255, 255, 255, 0.8) inset;
-    background: linear-gradient(90deg, rgb(85, 85, 85) 0%, black 50%, rgb(53, 52, 52) 100%);;
+.leftTrigger{
+  width: 6.18%;
+  height: 8.86%;
+  left: 18%;
+  border-radius: 25px 25px 0 0!important;
 }
 
-.arrow2 {
-    width: 90px;
-    height: 30px;
-    background-color: grey;
-    position: absolute;
-    left: 55px;
-    top: 195px;
-    border-radius: 5px;
-    box-shadow:
-    -0.2em -0.125em 0.125em rgba(0, 0, 0, 0.4), 
-    0 0 0 0.04em rgba(0, 0, 0, 0.5), 
-    0.02em 0.02em 0.02em rgba(0, 0, 0, 0.4) inset;
-    background: linear-gradient(90deg, rgb(85, 85, 85) 0%, black 50%, rgb(32, 32, 32) 100%);;
-    transform: rotate(90deg);
+.leftBumper{
+  width: 18.2%;
+  height: 8.86%;
+  left: 11.5%;
+  top: 8.86%;
+  border-radius: 120px 35px 25px 15px!important;
+}
+
+.rightTrigger{
+  width: 6.18%;
+  height: 8.86%;
+  left: 71.82%;
+  border-radius: 25px 25px 0 0!important;
+}
+
+.rightBumper{
+  width: 18.2%;
+  height: 8.86%;
+  top: 8.86%;
+  left: 65.4%;
+  border-radius: 35px 120px 15px 25px!important;
+}
+
+.back, .start {
+  position: absolute;
+  width: 5.3%;
+  height: 4.64%;
+  background: radial-gradient(ellipse at center, white 0%, #e0e0e0 100%);
+  border: 1px solid #c0c2c7;
+  border-radius: 15px;
+  top: 30.92%;
+}
+
+  
+.back{
+left: 34.63%;
+}
+
+.start{
+left: 55.12%;
+}
+
+.guide{
+  background: radial-gradient(ellipse at center, #dbdcdf 0%,darken(#dbdcdf, 12%) 100%);
+  border: 1px solid darken(#dbdcdf, 18%);
+  position: absolute;
+  width: 10.6%;
+  height: 13.25%;
+  border-radius: 60px!important;
+  left: 42.4%;
+  top: 26.72%;
+}
+
+.leftStickUp,  
+.leftStickDown, 
+.RightStickUp, 
+.RightStickDown{
+  position: absolute;
+  width: 6.18%;
+  height: 7.73%;
+  border: 1px solid darken(#dbdcdf, 75%);
+}
+
+.leftStickRight,
+.leftStickLeft,
+.RightStickRight,
+.RightStickLeft{
+  position: absolute;
+  width: 6.18%;
+  height: 7.73%;
+ 
+  border: 1px solid darken(#dbdcdf, 75%);
+}
+.dPadRight, .dPadLeft, .dPadUp, .dPadDown {
+  position: absolute;
+  width: 5.3%;
+  height: 6.63%;
+  background: #34363b;
+  border: 0;
+}
+
+.RightStickUp{
+  left: 58.1%;
+  top: 44.65%;
+  transform: rotate(-45deg);
+  background: linear-gradient(to top right, darken(#dbdcdf, 65%) 0%,darken(#dbdcdf, 85%) 80%);
+   border-radius: 0  100%  0 0!important;
+}
+.RightStickRight{
+  left: 62.75%;
+  top: 50.4%;
+  background: linear-gradient(to bottom right , darken(#dbdcdf, 65%) 0%,darken(#dbdcdf, 85%) 80%);
+  transform: rotate(-45deg);
+   border-radius: 0 0 100% 0!important;
+}
+.RightStickDown{
+  left: 58.1%;
+  top: 56.2%;
+    background: linear-gradient(to bottom , darken(#dbdcdf, 65%) 0%,darken(#dbdcdf, 85%) 80%);
+  transform: rotate(-45deg);
+   border-radius: 0 0 0 100%!important;
+}
+.RightStickLeft{
+  left: 53.4%;
+  top: 50.4%;
+  background: linear-gradient(to top left, darken(#dbdcdf, 65%) 0%,darken(#dbdcdf, 85%) 80%);
+  transform: rotate(-45deg);
+   border-radius: 100% 0 0 0!important;
+}
+
+
+.leftStickUp{
+  left: 15.85%;
+  top: 22.85%;
+  background: linear-gradient(to top right, darken(#dbdcdf, 65%) 0%,darken(#dbdcdf, 85%) 80%);
+  transform: rotate(-45deg);
+  border-radius:0 100% 0 0 !important;
+}
+.leftStickRight{
+  left: 20.49%;
+  top: 28.65%;
+  background: linear-gradient(to bottom right , darken(#dbdcdf, 65%) 0%,darken(#dbdcdf, 85%) 80%);
+  transform: rotate(-45deg);
+  border-radius:0 0 100% 0 !important;
+}
+.leftStickDown{
+  left: 15.85%;
+  top: 34.5%;
+  background: linear-gradient(to bottom , darken(#dbdcdf, 65%) 0%,darken(#dbdcdf, 85%) 80%);
+  transform: rotate(-45deg);
+  border-radius:0 0 0 100% !important;
+}
+.leftStickLeft{
+  left: 11.13%;
+  top: 28.65%;
+  background: linear-gradient(to top left, darken(#dbdcdf, 65%) 0%,darken(#dbdcdf, 85%) 80%);
+  transform: rotate(-45deg);
+  border-radius: 100% 0 0 0!important;
+}
+
+.rightStickPress,
+.leftStickPress{
+  position: absolute;
+  height: 7.4%;
+  width: 6%;
+  border-radius: 100%;
+  background: darken(#dbdcdf, 65%);
+}
+
+.leftStickPress{
+  left: 20%;
+  
+}
+
+.rightStickPress{
+  left: 56%;
+  top: 50%;
+}
+
+.dPadUp {
+  left: 30.21%;
+  top: 43.69%;
+  background: linear-gradient(to top, #272827 0%, #0e0e0e 80%);
+  border-radius: 5px 5px 0 0 !important;
+}
+.dPadRight {
+  left: 35.5%;
+  top: 50.35%;
+  background: linear-gradient(to right, #272827 0%, #0e0e0e 80%);
+  border-radius: 0 5px 5px 0 !important;
+}
+.dPadDown {
+  left: 30.21%;
+  top: 56.96%;
+  background: linear-gradient(to bottom, #272827 0%, #0e0e0e 80%);
+  border-radius: 0 0 5px 5px !important;
+}
+.dPadLeft {
+  left: 24.9%;
+  top: 50.35%;
+  background: linear-gradient(to left, #272827 0%, #0e0e0e 80%);
+  border-radius: 5px 0 0 5px !important;
+}
+
+.holder, .joyStickLeft, .joyStickRight{
+  visibility: hidden;
+}
+
+#joyStickLeft{
+  position: relative;
+  left: -5%;
+  top: 25%;
+}
+
+
+#joyStickRight {
+  position: relative;
+  left: 35%;
+  top: 50%;
 }
