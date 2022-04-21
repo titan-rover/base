@@ -44,7 +44,11 @@ class Electricals extends Component {
             },
             mobility: {
                 amps: []
-            }
+            },
+            wheel1: 0,
+            wheel2: 0,
+            wheel3: 0,
+            wheel4: 0
         };
 
         /* this.connectRosBridge(url) is a top level function call that passes the url to the connectRosBridge(url) functions
@@ -58,6 +62,27 @@ class Electricals extends Component {
         /* These lines instantiate listeners, publishers, and callback registrations for all the react modules we imported */
         this.createListeners();
         this.registerCallbacks();
+    }
+
+    componentDidMount() {
+
+      this.timerID = setInterval(
+        () => this.tick(this.state),
+        500
+      );
+
+    }
+
+    tick(state)
+    {
+
+      this.setState(() => ({
+        wheel1: this.state.wheel1 + 0.1,
+        wheel2: this.state.wheel2 + 0.1,
+        wheel3: this.state.wheel3 + 0.1,
+        wheel4: this.state.wheel4 + 0.1
+      }));
+
     }
 
     registerCallbacks() {
@@ -117,7 +142,11 @@ class Electricals extends Component {
                     //       }
                     mobility: {
                         amps: prevDataC
-                    }
+                    },
+                    wheel1: m.wheel1.amps,
+                    wheel2: m.wheel2.amps,
+                    wheel3: m.wheel3.amps,
+                    wheel4: m.wheel4.amps
                 });
             });
         }
@@ -175,8 +204,8 @@ class Electricals extends Component {
                                     animationDuration={150}
                                     animationRule={'linear'}
                                     units='AMPS'
-                                    title='Motor 1'
-                                    value={this.state.mobility.amps}
+                                    title='Top Left Wheel'
+                                    value={this.state.wheel1}
                                     minValue={0}
                                     maxValue={100}
                                     majorTicks={['0', '15', '30', '45', '60', '75']}
@@ -185,13 +214,41 @@ class Electricals extends Component {
                                 <ReactRadialGauge
                                     width={500}
                                     height={500}
-                                    units='MPH'
-                                    title='Motor 1'
-                                    value={0}
+                                    animationDuration={150}
+                                    animationRule={'linear'}
+                                    units='AMPS'
+                                    title='Top Right Wheel'
+                                    value={this.state.wheel2}
                                     minValue={0}
                                     maxValue={100}
-                                    majorTicks={['0', '5', '15', '20', '25', '30', '35', '40', '45', '50']}
-                                    minorTicks={2}
+                                    majorTicks={['0', '15', '30', '45', '60', '75']}
+                                    minorTicks={5}
+                                ></ReactRadialGauge>
+                                <ReactRadialGauge
+                                    width={500}
+                                    height={500}
+                                    animationDuration={150}
+                                    animationRule={'linear'}
+                                    units='AMPS'
+                                    title='Back Left Wheel'
+                                    value={this.state.wheel3}
+                                    minValue={0}
+                                    maxValue={100}
+                                    majorTicks={['0', '15', '30', '45', '60', '75']}
+                                    minorTicks={5}
+                                ></ReactRadialGauge>
+                                <ReactRadialGauge
+                                    width={500}
+                                    height={500}
+                                    animationDuration={150}
+                                    animationRule={'linear'}
+                                    units='AMPS'
+                                    title='Back Right Wheel'
+                                    value={this.state.wheel4}
+                                    minValue={0}
+                                    maxValue={100}
+                                    majorTicks={['0', '15', '30', '45', '60', '75']}
+                                    minorTicks={5}
                                 ></ReactRadialGauge>
                             </Container>
 
