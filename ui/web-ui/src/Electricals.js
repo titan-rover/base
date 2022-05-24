@@ -159,7 +159,7 @@ class Electricals extends Component {
             this.mobility_listener = new ROSLIB.Topic({
                 ros: this.ros,
                 name: "/mobility",
-                messageType: "fake_sensor_test/mobility",
+                messageType: "telemetry/mobility",
                 throttle_rate: this.THROTTLE_RATE,
                 queue_length: this.QUEUE_LENGTH
             });

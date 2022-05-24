@@ -7,7 +7,7 @@ class Fluid extends Component {
         return (
             <Container>
                 <MyNavbar/>
-                Somthing goes here
+                Something goes here
             </Container>
         );
     }

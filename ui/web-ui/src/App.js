@@ -101,6 +101,7 @@ class App extends Component {
     this.autonomousMarkerHandler = this.autonomousMarkerHandler.bind(this);
     this.onClickHandler = this.onClickHandler.bind(this);
   }
+
   componentWillUnmount() {
     // this.antenna_listener.unsubscribe();
     this.rovergps_listener.unsubscribe();
@@ -331,7 +332,7 @@ class App extends Component {
       this.rovergps_listener = new ROSLIB.Topic({
         ros : this.ros,
         name : "/gnss",
-        messageType : "telemetry/gps",
+        messageType : "gnss/gps",
         throttle_rate : this.THROTTLE_RATE,
         queue_length : this.QUEUE_LENGTH
       });
