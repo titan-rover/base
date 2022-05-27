@@ -1,3 +1,5 @@
+// Author: Khang Pham
+
 import React, { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
 import { MapContainer, Marker, TileLayer, useMap  } from 'react-leaflet';
@@ -112,10 +114,7 @@ function MapTile(props)
           ()}
 
           <TileLayer
-          /*
-          url to      url='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
-          another map attribution= 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-          */
+
           attribution="&copy; <a href=&quot;https://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
           url="Fullerton/{z}/{x}/{y}.png"
           />

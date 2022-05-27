@@ -17,6 +17,7 @@ import Row from "react-bootstrap/Row";
 import {toast, ToastContainer} from "react-toastify";
 import ROSLIB from "roslib";
 
+
 import AntennaSignal from "./components/AntennaSignal";
 import Compass from "./components/Compass";
 import GPS from "./components/GPS";
@@ -33,6 +34,9 @@ import MyNavbar from "./components/Navbar";
 import TemperatureSensor from "./components/TemperatureSensor";
 import UltrasonicSensor from "./components/UltrasonicSensor";
 
+import RosVisualization from "./components/RosVisualization";
+
+const ROS3D = require('ros3d');
 const styles = {
   grid : {paddingLeft : 0, paddingRight : 0},
   row : {marginLeft : 0, marginRight : 0},
@@ -308,6 +312,8 @@ class App extends Component {
     }
   }
 
+
+
   // Creates ROS Topic objects for Publishers
   createPublishers() {
     try {
@@ -479,37 +485,30 @@ class App extends Component {
           <Row className="mt-2">
             <Col>
               {/* IMU Component */}
-
-
               {(() => {
-        if (this.state.imu_on === true) {
+                if (this.state.imu_on === true) {
                   return(
-                    <IMU
-                  position = {this.state.imu.position} rotation =
-                  {
-                    this.state.imu.rotation
-                  } />
-                  )
+                    <IMU position = {this.state.imu.position}
+                      rotation = {this.state.imu.rotation} />
+                  );
                 }
               })
               ()}
+
               <button id="imu_button" onClick={this.onClickHandler}>
               Display
               </button >
-                      </Col>
+            </Col>
             <Col>
-              {/*
-                       Antenna Component */}
-              <AntennaSignal
-                signal_strength={this.state.antenna.decibels} />
-                      </Col>
-          </Row><Row className = "mt-2">
-                      <Col>{/* Mobility Current Draw Component */} <
-                      MobilityCurrentDraw
-                  current_draw =
-                  { this.state.mobility.amps } />
-            </Col > <
-                      /Row>
+              {/* Antenna Component */}
+              <AntennaSignal signal_strength={this.state.antenna.decibels} />
+            </Col>
+          </Row>
+          <Row className = "mt-2">
+            <Col>{/* Mobility Current Draw Component */}
+              <MobilityCurrentDraw current_draw = {this.state.mobility.amps } />
+            </Col>
+          </Row>
           <Row className="mt-2">
             {/*
                           Temperature Component */}
@@ -523,19 +522,18 @@ class App extends Component {
             <Compass heading={this.state.imu.heading} /><
                       /Col>
           <Col> */}
-        <Col>{/* Ultrasonic Sensor Component */} < UltrasonicSensor
-        max_distance =
-        { this.state.ultrasonic.distance } />
-            </Col > <
-            /Row>
+          <Col>{/* Ultrasonic Sensor Component */}
+            <UltrasonicSensor max_distance = {this.state.ultrasonic.distance}/>
+          </Col >
+        </Row>
           {/*<Row className = "mt-2"><Col><XboxController>
             </XboxController>
             </Col>< /Row> */}
-          <Row className="mt-2">
+            <Row className="mt-2">
             <Col>
               {/* Map Component */}
-              <MapTile angle={this.state.angle} markerList={this.state.markerList} latitude={this.state.latitude} longitude={
-        this.state.longitude}/>
+              <MapTile angle={this.state.angle} markerList={this.state.markerList}
+                latitude={this.state.latitude} longitude={this.state.longitude}/>
 
             </Col>
           </Row>
@@ -545,6 +543,11 @@ class App extends Component {
             </Col>
             <Col>
               <GPS  autonomousMarkerHandler = {this.autonomousMarkerHandler}/>
+            </Col>
+          </Row>
+          <Row className="mt-2">
+            <Col>
+              <RosVisualization ros = {this.ros}/>
             </Col>
           </Row>
           {/* <Row className="mt-2">
@@ -561,8 +564,7 @@ class App extends Component {
           </Col>
         </Row> */}
           {/* Not added by Michael, no idea about Toast */}
-          <ToastContainer autoClose={
-        3000} />
+          <ToastContainer autoClose={3000} />
         </Container>
       </Container>
     );
