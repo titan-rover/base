@@ -201,7 +201,7 @@ class Electricals extends Component {
                                 <ReactRadialGauge
                                     width={500}
                                     height={500}
-                                    animationDuration={150}
+                                    animationDuration={50}
                                     animationRule={'linear'}
                                     units='AMPS'
                                     title='Top Left Wheel'
@@ -214,7 +214,7 @@ class Electricals extends Component {
                                 <ReactRadialGauge
                                     width={500}
                                     height={500}
-                                    animationDuration={150}
+                                    animationDuration={50}
                                     animationRule={'linear'}
                                     units='AMPS'
                                     title='Top Right Wheel'
@@ -227,7 +227,7 @@ class Electricals extends Component {
                                 <ReactRadialGauge
                                     width={500}
                                     height={500}
-                                    animationDuration={150}
+                                    animationDuration={50}
                                     animationRule={'linear'}
                                     units='AMPS'
                                     title='Back Left Wheel'
@@ -240,7 +240,7 @@ class Electricals extends Component {
                                 <ReactRadialGauge
                                     width={500}
                                     height={500}
-                                    animationDuration={150}
+                                    animationDuration={50}
                                     animationRule={'linear'}
                                     units='AMPS'
                                     title='Back Right Wheel'
