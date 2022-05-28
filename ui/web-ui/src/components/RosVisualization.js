@@ -22,20 +22,16 @@ class RosVisualization extends Component {
 
    }
    componentDidMount() {
-     this.CreateViewer();
-     this.CreateTfClient();
-     this.CreateUrdfClient();
+     const createGraph = async () => {
+       await this.CreateViewer();
+       await this.CreateTfClient();
+       await this.CreateUrdfClient();
+
+     }
+     createGraph();
    }
 
-   resolveAfter2Seconds() {
-     return new Promise(resolve => {
-       setTimeout(() => {
-         resolve('resolved');
-       }, 2000);
-     });
-   }
-
-   async CreateViewer() {
+   CreateViewer() {
       let viewer = new ROS3D.Viewer({
         divID : 'urdf',
         width : 800,
@@ -50,7 +46,8 @@ class RosVisualization extends Component {
       });
 
    }
-   async CreateTfClient() {
+
+   CreateTfClient() {
      let tfClient = new ROSLIB.TFClient({
       ros : this.state.ros,
       angularThres : 0.01,
@@ -64,21 +61,7 @@ class RosVisualization extends Component {
 
    }
 
-   async CreateUrdfClient() {
-     const result = await this.resolveAfter2Seconds();
-
-     const xhr = new XMLHttpRequest();
-     xhr.open("GET", 'http://localhost:4020/random.dae');
-     xhr.responseType = 'text';
-     xhr.onreadystatechange = () => {
-     	if(xhr.readyState == 4 && xhr.status == 200) {
-        console.log(xhr.response);
-        console.log('hello')
-     	}
-     }
-     // xhr.send();
-
-
+    CreateUrdfClient() {
 
      let urdfClient = new ROS3D.UrdfClient({
       ros : this.state.ros,
