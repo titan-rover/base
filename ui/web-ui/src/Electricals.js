@@ -14,6 +14,10 @@ import Container from 'react-bootstrap/esm/Container';
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
+//toast imports
+import {toast, ToastContainer} from "react-toastify";
+
+
 //import ui components
 import InverseKinematics from "./components/InverseKinematics";
 import MyNavbar from './components/Navbar';
@@ -82,6 +86,13 @@ class Electricals extends Component {
         wheel3: this.state.wheel3 + 0.1,
         wheel4: this.state.wheel4 + 0.1
       }));
+      if (this.state.wheel1 == 0.4) {
+          console.log('hello')
+          toast.warn("CURRENT DRAW HIGH!", {
+              position: toast.POSITION.BOTTOM_RIGHT,
+              toastId: this.HIGH_CURRENT_ID
+          });
+      }
 
     }
 
@@ -128,12 +139,12 @@ class Electricals extends Component {
 
                 prevDataC.push(m.current_draw);
 
-                // if (m.current_draw > 70) {
-                //     toast.warn("CURRENT DRAW HIGH!", {
-                //         position: toast.POSITION.BOTTOM_RIGHT,
-                //         toastId: this.HIGH_CURRENT_ID
-                //     });
-                // }
+                if (m.current_draw > 70) {
+                    toast.warn("CURRENT DRAW HIGH!", {
+                        position: toast.POSITION.BOTTOM_RIGHT,
+                        toastId: this.HIGH_CURRENT_ID
+                    });
+                }
 
                 this.setState({
                     //       roboclaw: {
@@ -266,6 +277,8 @@ class Electricals extends Component {
                             <InverseKinematics />
                         </Col>
                     </Row>
+                    <ToastContainer autoClose={100000} />
+
                 </Container>
             </Container>
         );
