@@ -37,7 +37,6 @@ class GPS extends Component {
     if(this.state.markerList !== prevState.markerList)
     {
       this.markerHandler(this.state.markerList);
-
     }
 
   }

@@ -59,7 +59,7 @@ class Electricals extends Component {
         inside of all the custom react imports we imported at the top. */
         //this.connectRosBridge("ws://192.168.1.100:9090");
 
-        this.connectRosBridge("ws://localhost:9090");
+        this.connectRosBridge("ws://localhost:9091");
         // this.connectRosBridge("wss://controls.titanrover.com:9443");
 
 
@@ -68,33 +68,33 @@ class Electricals extends Component {
         this.registerCallbacks();
     }
 
-    componentDidMount() {
-
-      this.timerID = setInterval(
-        () => this.tick(this.state),
-        500
-      );
-
-    }
-
-    tick(state)
-    {
-
-      this.setState(() => ({
-        wheel1: this.state.wheel1 + 0.1,
-        wheel2: this.state.wheel2 + 0.1,
-        wheel3: this.state.wheel3 + 0.1,
-        wheel4: this.state.wheel4 + 0.1
-      }));
-      if (this.state.wheel1 == 0.4) {
-          console.log('hello')
-          toast.warn("CURRENT DRAW HIGH!", {
-              position: toast.POSITION.BOTTOM_RIGHT,
-              toastId: this.HIGH_CURRENT_ID
-          });
-      }
-
-    }
+    // componentDidMount() {
+    //
+    //   this.timerID = setInterval(
+    //     () => this.tick(this.state),
+    //     500
+    //   );
+    //
+    // }
+    //
+    // tick(state)
+    // {
+    //
+    //   this.setState(() => ({
+    //     wheel1: this.state.wheel1 + 0.1,
+    //     wheel2: this.state.wheel2 + 0.1,
+    //     wheel3: this.state.wheel3 + 0.1,
+    //     wheel4: this.state.wheel4 + 0.1
+    //   }));
+    //   if (this.state.wheel1 == 0.4) {
+    //       console.log('hello')
+    //       toast.warn("CURRENT DRAW HIGH!", {
+    //           position: toast.POSITION.BOTTOM_RIGHT,
+    //           toastId: this.HIGH_CURRENT_ID
+    //       });
+    //   }
+    //
+    // }
 
     registerCallbacks() {
         //Register ros callbacks
@@ -161,18 +161,34 @@ class Electricals extends Component {
                 });
             });
         }
+
+        if(this.wheel1) {
+          this.wheel1.subscribe(m => {
+            console.log(m);
+            this.setState({
+              wheel1: m.data
+            })
+          });
+        }
     }
 
     // Creates ROS Topic objects for Listeners
     // Similar to Publishers, but includes throttle rate and queque for the incoming messages
     createListeners() {
         try {
-            this.mobility_listener = new ROSLIB.Topic({
-                ros: this.ros,
-                name: "/mobility",
-                messageType: "telemetry/mobility",
-                throttle_rate: this.THROTTLE_RATE,
-                queue_length: this.QUEUE_LENGTH
+            // this.mobility_listener = new ROSLIB.Topic({
+            //     ros: this.ros,
+            //     name: "/mobility",
+            //     messageType: "telemetry/mobility",
+            //     throttle_rate: this.THROTTLE_RATE,
+            //     queue_length: this.QUEUE_LENGTH
+            // });
+            this.wheel1 = new ROSLIB.Topic({
+              ros: this.ros,
+              name: "wheel1",
+              messageType: "std_msgs/Float32",
+              throttle_rate : this.THROTTLE_RATE,
+              queue_length : this.QUEUE_LENGTH
             });
 
         } catch (e) {

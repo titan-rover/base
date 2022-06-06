@@ -26,20 +26,22 @@ class RosVisualization extends Component {
        await this.CreateViewer();
        await this.CreateTfClient();
        await this.CreateUrdfClient();
-
+       // await this.CreateMarkerClient();
      }
      createGraph();
    }
+
+
 
    CreateViewer() {
       let viewer = new ROS3D.Viewer({
         divID : 'urdf',
         width : 800,
         height : 600,
-        antialias : true
+        background: '#444444',
+        antialias : true,
       });
       viewer.addObject(new ROS3D.Grid());
-
 
       this.setState({
         viewer: viewer
@@ -52,7 +54,8 @@ class RosVisualization extends Component {
       ros : this.state.ros,
       angularThres : 0.01,
       transThres : 0.01,
-      rate : 10.0
+      rate : 10.0,
+      fixedFrame: '/odom'
     });
 
     this.setState({
@@ -68,7 +71,7 @@ class RosVisualization extends Component {
       tfClient : this.state.tfClient,
       path : 'http://localhost:4020/',
       rootObject : this.state.viewer.scene,
-      loader : ROS3D.COLLADA_LOADER
+      loader : ROS3D.COLLADA_LOADER_2
     });
 
     this.setState({
@@ -76,6 +79,15 @@ class RosVisualization extends Component {
     });
 
    }
+
+   // CreateMarkerClient() {
+   //   var markerClient = new ROS3D.MarkerClient({
+   //   ros : this.state.ros,
+   //   tfClient : this.state.tfClient,
+   //   topic : '/visualization_marker',
+   //   rootObject : this.state.viewer.scene
+   //  });
+   // }
 
   render() {
 
