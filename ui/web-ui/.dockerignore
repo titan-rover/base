@@ -1,0 +1,9 @@
+/node_nodules
+
+/build
+
+.git
+
+*.md
+
+.gitignore
